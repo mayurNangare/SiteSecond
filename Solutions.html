@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Footer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Reset default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;      
+
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #ffffff;
+            color: #000;
+            padding: 15px 20px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            background-color: black;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .hamburger.close span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.close span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.close span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #333;
+                width: 100%;
+                z-index: 10;
+                padding: 20px 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .nav-links a {
+                color: white;
+                padding: 10px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+ /* Hero Section */
+/* Hero Section Styles */
+.hero {
+        background: url('/innovat2.jpeg') no-repeat center center/cover;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        padding: 0 105px;
+        text-align: left;
+    }
+
+    .hero-content h1 {
+        color: #f5f7fa;
+        font-size: 3rem;
+        font-weight: 600;
+        line-height: 1.2;
+        margin: 0;
+        opacity: 0; /* Initially hidden */
+        transform: translateX(-50px); /* Start position for animation */
+        animation: textReveal 1.5s ease-out forwards; /* Trigger animation */
+    }
+
+    @keyframes textReveal {
+        to {
+            opacity: 1;
+            transform: translateX(0); /* End position */
+        }
+    }
+.custom-section {
+  padding: 20px 10%;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.column {
+  width: 32%;  /* Adjust for 3 columns per row */
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: justify;
+}
+
+.column img {
+  width: 100%;    /* Allow image to take full width of the column */
+  max-width: 350px;  /* Increased image width */
+  height: auto;
+}
+
+.column h1 {
+    font-size: 2.2857142858rem;
+font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: .5rem;
+    color: #1d2833;
+    font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  margin: 10px 0;
+}
+
+.column p {
+    font-size: 1.2857142857rem;
+line-height: 1.875rem;
+font-weight: 400;
+color: #1d2833;
+    font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  color: #555;
+}
+
+.column .button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #5c2d91; /* Adjust button color */
+  color: white;
+  text-decoration: none;
+  /* border-radius: 5px; */
+  transition: background-color 0.3s;
+}
+
+.column .button:hover {
+  background-color: #3700b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .column {
+    width: 48%;  /* Adjust for 2 columns on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .column {
+    width: 100%;  /* Adjust for 1 column on very small screens */
+  }
+}
+
+        /* Footer Styling */
+        footer {
+            background-color: #f5f6f7;
+            padding: 56px 0;
+            /* Adjusted padding to avoid unnecessary horizontal spacing */
+            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            color: #333;
+            width: 100%;
+            /* Ensures full-width footer */
+            box-sizing: border-box;
+            /* Includes padding within the total width */
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            /* Ensures content has a maximum width for readability */
+            margin: 0 auto;
+            /* Centers the content horizontally */
+            padding: 0 14px;
+            /* Adds a small padding for inner content */
+        }
+
+        .footer-main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .column-left,
+        .column-right {
+            padding: 0 14px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin: 10px 0;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #4b0082;
+            font-weight: bold;
+            font-size: 1.3rem;
+            line-height: 1.5;
+        }
+
+        .footer-links a:hover {
+            color: #000;
+        }
+
+        /* Right Column */
+        .footer-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .text-row p {
+            text-align: left;
+            line-height: 1.81rem;
+            font-size: 1.28rem;
+        }
+
+        .text-row a {
+            color: #4b0082;
+            text-decoration: none;
+        }
+
+        .text-row a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Icons Section */
+        .footer-social {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            color: #4b0082;
+            font-size: 20px;
+            margin-right: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            color: #000;
+        }
+
+        /* Footer Bottom Section */
+        .footer-line {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        .legal-links a {
+            margin: 0 5px;
+            font-size: 1.12rem;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .legal-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-main {
+                flex-direction: column;
+                padding: 0 14px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .legal-links {
+                margin-top: 10px;
+            }
+        }
+        section.section-connect {
+      background-color: #5c2d91;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 10%;  /* 10% padding on left and right */
+    }
+
+    section.section-connect h2 {
+      margin: 0;
+      font-size: 2.2857142858rem;  /* Updated font size */
+      font-weight: 600;            /* Updated font weight */
+      line-height: 1.2;            /* Updated line height */
+    }
+
+    .contact-button {
+      background: none;
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 1rem;             /* Updated font size */
+      font-weight: 700;            /* Updated font weight */
+      letter-spacing: 0.0375rem;   /* Updated letter spacing */
+      line-height: 1.5;            /* Updated line height */
+      text-align: center;          /* Centered text */
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .contact-button:hover {
+      background-color: #fff;
+      color: #5c2d91;
+    }
+
+    @media (max-width: 768px) {
+      section.section-connect {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
+      .contact-button {
+        width: 100%;
+        max-width: 200px;
+      }
+    }
+
+
+
+    .future-of-work {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 40px 10%; /* Top padding and 15% left-right padding */
+      gap: 50px; /* Gap between content and stats */
+      background-color: #fff;
+    }
+
+    .contenthello {
+      flex: 1 1 60%;
+      max-width: 60%;
+    }
+
+    .contenthello h1 {
+      font-size: 2.2857142858rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: #1d2833;
+      font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    }
+
+    .contenthello p {
+      font-size: 1.2857142857rem;
+      line-height: 1.875rem;
+      font-weight: 400;
+      color: #1d2833;
+      font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      margin-bottom: 15px;
+    }
+
+    .statshello {
+      flex: 1 1 35%;
+      max-width: 35%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px; /* Gap between stat items */
+      padding-top: 1.3%; /* Added top padding for stats */
+    }
+
+    .stat-itemhello {
+      display: flex;
+      flex-direction: column; /* Icon and text stacked vertically */
+      align-items: flex-start; /* Left alignment */
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .stat-itemhello img {
+      width: 50px; /* Fixed width for the icon */
+      height: 50px; /* Fixed height for the icon */
+      margin-bottom: 10px; /* Space between icon and text */
+    }
+
+    .stat-itemhello p {
+      font-size: 1.2857142857rem;
+      line-height: 1.875rem;
+      font-weight: 400;
+      color: #1d2833;
+      font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      margin: 0;
+      text-align: left; /* Left-aligned text */
+    }
+
+    .stat-itemhello::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #ccc;
+    }
+
+    .stat-itemhello:last-child::after {
+      display: none; /* Remove the line after the last stat item */
+    }
+
+    @media screen and (max-width: 768px) {
+      .future-of-work {
+        flex-direction: column;
+      }
+
+      .contenthello, .statshello {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+
+      .stat-itemhello {
+        padding-bottom: 15px; /* Adjust padding for smaller screens */
+      }
+    }
+
+
+
+    .container878 {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 20px;
+      gap: 20px;
+    }
+
+    .image878 {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .image878 img {
+      width: 100%;
+      /* border-radius: 5px; */
+    }
+
+    .text-content878 {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .heading878 {
+      font-size: 2.2857142858rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: #1d2833;
+      font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      color: #0078d4;
+    }
+
+    .description878 {
+      font-size: 1.2857142857rem;
+      line-height: 1.875rem;
+      font-weight: 400;
+      color: #1d2833;
+      font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    }
+
+    @media (max-width: 768px) {
+      .container878 {
+        flex-direction: column;
+      }
+
+      .image878, .text-content878 {
+        max-width: 100%;
+      }
+
+      .heading878 {
+        font-size: 20px;
+      }
+    }
+
+
+    
+    /* Scroll Up Button */
+#scrollUpBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#scrollUpBtn:hover {
+    background-color: #8e44ad;
+}
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Logo</div>
+            <ul class="nav-links">
+                <li><a href="/Index.html">Home</a></li>
+                <li><a href="/About.html">About</a></li>
+                <li><a href="/Solutions.html">Services</a></li>
+                <li><a href="/service1.html">Solution</a></li>
+                <li><a href="/Contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Empowering Innovation and Growth</h1>
+        </div>
+    </section>
+    <section class="future-of-work">
+        <div class="contenthello">
+          <h1>Power the Future of Work</h1>
+          <p>
+            DXC Intelligent Collaboration services provide new ways of working, connecting and collaborating. 
+            Modernising existing tools and applications to collaboration-rich solutions empowers employees to 
+            do their jobs efficiently and collaborate effectively — and safely — wherever they are.
+          </p>
+          <p>
+            We combine traditional unified communications services, workplace networks and next-generation voice, video, web conferencing, 
+            meeting rooms, immersive collaboration and mixed reality capabilities that free employees to work and collaborate in new ways.
+          </p>
+        </div>
+        <div class="statshello">
+          <div class="stat-itemhello">
+            <img src="/user.png" alt="Business Icon">
+            <p>Over 10.4 million Microsoft 365 seats and Teams monthly active users managed</p>
+          </div>
+          <div class="stat-itemhello">
+            <img src="/communication.jpeg" alt="Collaboration Icon">
+            <p>Over 4.4 million unified communications seats managed</p>
+          </div>
+        </div>
+      </section>
+    <section class="custom-section">
+        <div class="container">
+          <div class="column">
+            <img src="/DATACENTER.jpeg" alt="Image 1" class="image">
+            <h1>Data Center </h1>
+            <p>Data Protection Solutions and Services provides tools for organizations to help protect their importantr data assets. We manage and mainmtain data availability 24/7 and take care of the underlying redundancy, backups, disaster recovery and storage.</p>
+            <a href="page1.html" class="button">Read More</a>
+          </div>
+          <div class="column">
+            <img src="/SERVER.jpeg" alt="Image 2" class="image">
+            <h1>Servers & Storage</h1>
+            <p>Data Protection Solutions and Services provides tools for organizations to help protect their importantr data assets. We manage and mainmtain data availability 24/7 and take care of the underlying redundancy, backups, disaster recovery and storage.</p>
+            <a href="page2.html" class="button">Read More</a>
+          </div>
+          <div class="column">
+            <img src="/SERVER.jpeg" alt="Image 3" class="image">
+            <h1>Data Protection </h1>
+            <p>Data Protection Solutions and Services provides tools for organizations to help protect their importantr data assets. We manage and mainmtain data availability 24/7 and take care of the underlying redundancy, backups, disaster recovery and storage.</p>
+            <a href="page3.html" class="button">Read More</a>
+          </div>
+        </div>
+      </section>
+      <section class="container878">
+        <div class="image878">
+          <img src="/human2.jpeg" alt="Human-Machine World">
+        </div>
+        <div class="text-content878">
+          <h2 class="heading878">Leading the future of driving in a human-machine world</h2>
+          <p class="description878">
+            Scuderia Ferrari HP is embracing smart human-machine interface technologies
+            for greater performance and a better driving experience on and off the track.
+          </p>
+        </div>
+      </section>
+      <section class="section-connect">
+        <h2>Connect with DXC</h2>
+        <button class="contact-button">Contact Us</button>
+      </section>
+    <footer>
+        <div class="footer-container">
+            <!-- Main Section -->
+            <div class="footer-main">
+                <div class="column-left">
+                    <ul class="footer-links">
+                        <li><a href="#">ABOUT</a></li>
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="#">Solution</a></li>
+                        
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="column-right">
+                    <div class="logo-row">
+                        <img src="logo.png" alt="DXC Logo" class="footer-logo">
+                    </div>
+                    <div class="text-row">
+                        <p>
+                            DXC Technology (NYSE: DXC) helps global companies run their mission-critical systems and
+                            operations while
+                            modernizing IT, optimizing data architectures, and ensuring security and scalability across
+                            public, private, and
+                            hybrid clouds. The world's largest companies and public sector organizations trust DXC to
+                            deploy services to drive
+                            new levels of performance, competitiveness, and customer experience across their IT estates.
+                            Learn more about how
+                            we deliver excellence for our customers and colleagues at <a href="https://dxc.com"
+                                target="_blank">DXC.com</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Icons Section -->
+            <div class="footer-social">
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Section -->
+            <hr class="footer-line">
+            <div class="footer-bottom">
+                <p class="copyright">© DXC Technology Company</p>
+                <div class="legal-links">
+                    <a href="#">Cookies</a> |
+                    <a href="#">Terms</a> |
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- Scroll Up Button -->
+<button id="scrollUpBtn" title="Scroll to Top">↑</button>
+    <script src="script.js"></script>
+    <script>
+      
+        
+        // Scroll Up Button Functionality
+        var scrollUpBtn = document.getElementById("scrollUpBtn");
+        
+        // When the user scrolls down 100px from the top of the document, show the button
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollUpBtn.style.display = "block";
+            } else {
+                scrollUpBtn.style.display = "none";
+            }
+        };
+        
+        // When the user clicks on the button, scroll to the top of the document
+        scrollUpBtn.addEventListener("click", function() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        </script>
+</body>
+
+</html>

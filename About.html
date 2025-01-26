@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Footer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Reset default browser styles */
+* {
+    
+    font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;      
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+}
+
+/* Header Styles */
+header {
+            background-color: #ffffff;
+            color: #000;
+            padding: 15px 20px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            background-color: black;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .hamburger.close span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.close span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.close span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #333;
+                width: 100%;
+                z-index: 10;
+                padding: 20px 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .nav-links a {
+                color: white;
+                padding: 10px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+ /* Hero Section */
+/* Hero Section Styles */
+.hero {
+        background: url('/innovat2.jpeg') no-repeat center center/cover;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        padding: 0 105px;
+        text-align: left;
+    }
+
+    .hero-content h1 {
+        color: #f5f7fa;
+        font-size: 3rem;
+        font-weight: 600;
+        line-height: 1.2;
+        margin: 0;
+        opacity: 0; /* Initially hidden */
+        transform: translateX(-50px); /* Start position for animation */
+        animation: textReveal 1.5s ease-out forwards; /* Trigger animation */
+    }
+
+    @keyframes textReveal {
+        to {
+            opacity: 1;
+            transform: translateX(0); /* End position */
+        }
+    }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 105px;
+            gap: 50px;
+            text-align: center;
+            font-size: 16px;
+            background-color: #5c2d91;
+        }
+
+        .stat span {
+            font-size: 1.75rem;
+            font-weight: 600;
+            line-height: 1.1;
+            color: #eaeaea;
+        }
+
+        .stat p {
+            font-size: 1.2857142857rem;
+            line-height: 1.875rem;
+            font-weight: 400;
+            color: #f9f9f9;
+        }
+
+        .vertical-line {
+            width: 1px;
+            height: 100px; /* Increased height */
+            background-color: #000000;
+        }
+
+        /* Video and Text Section */
+        .video-text {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 30px 15%;
+            gap: 30px;
+            color: #000;
+        }
+
+        .video {
+            flex: 1;
+            max-width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-thumbnail .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .video-thumbnail .play-button::before {
+            content: '\25BA';
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .text {
+            flex: 1;
+        }
+
+        .text h2 {
+            font-size: 2.2857142858rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #050505;
+        }
+
+        .text p {
+            font-size: 1.2857142857rem;
+            line-height: 1.875rem;
+            font-weight: 400;
+            color: #000000;
+        }
+
+        /* Video Popup */
+        .video-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            display: none; /* Hidden by default */
+        }
+
+        .video-popup video {
+            width: 80%;
+            border-radius: 10px;
+        }
+
+        .video-popup .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 20px;
+                height: auto;
+                text-align: center;
+            }
+
+            .stats {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .vertical-line {
+                display: none;
+            }
+
+            .video-text {
+                flex-direction: column;
+                padding: 20px;
+            }
+        }
+.partner-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10% 5%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .partner-logos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            flex: 1 1 50%;
+        }
+
+        .partner-logos img {
+            width: 120px; /* Fixed width */
+            height: 50px; /* Fixed height */
+            object-fit: fill;
+            margin: 0 auto;
+        }
+
+        .partner-content {
+            flex: 1 1 40%;
+        }
+
+        .partner-heading {
+            font-size: 2.2857142858rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #090d10;
+        }
+
+        .partner-description {
+            font-size: 1.2857142857rem;
+            line-height: 1.875rem;
+            font-weight: 400;
+            color: #1d2833;
+            margin-bottom: 1rem;
+        }
+
+        .partner-link {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .partner-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .partner-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .partner-logos {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+
+            .partner-content {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .partner-logos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .partner-logos img {
+                width: 100px; /* Fixed width for smaller screens */
+                height: 40px; /* Fixed height for smaller screens */
+            }
+        }
+
+        .section-explore {
+      background-color: #f5f7fa;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .section-explore p {
+      font-size: 20px;
+      margin: 0;
+      color: #333;
+    }
+
+    .section-explore a {
+      color: #0078d4;
+      text-decoration: none;
+    }
+
+    .section-explore a:hover {
+      text-decoration: underline;
+    }
+
+    section.section-connect {
+      background-color: #5c2d91;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 10%;  /* 10% padding on left and right */
+    }
+
+    section.section-connect h2 {
+      margin: 0;
+      font-size: 2.2857142858rem;  /* Updated font size */
+      font-weight: 600;            /* Updated font weight */
+      line-height: 1.2;            /* Updated line height */
+    }
+
+    .contact-button {
+      background: none;
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 1rem;             /* Updated font size */
+      font-weight: 700;            /* Updated font weight */
+      letter-spacing: 0.0375rem;   /* Updated letter spacing */
+      line-height: 1.5;            /* Updated line height */
+      text-align: center;          /* Centered text */
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .contact-button:hover {
+      background-color: #fff;
+      color: #5c2d91;
+    }
+
+    @media (max-width: 768px) {
+      section.section-connect {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
+      .contact-button {
+        width: 100%;
+        max-width: 200px;
+      }
+    }
+    .responsive-section {
+      padding: 20px 15%;
+      box-sizing: border-box;
+    }
+
+    .container1 {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .row1 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3%;
+      margin-bottom: 3%;
+    }
+
+    .column1 {
+      width: 48%;
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+    }
+
+    .image-column {
+      width: 100%;
+    }
+
+    .text-column {
+      width: 100%;
+      padding-left: 10px;
+    }
+
+    .image-column img {
+      width: 100%;
+      height: auto;
+    }
+
+    .border-top {
+      border-top: 2px solid black;
+      padding-top: 10px;
+    }
+
+    /* Styles for h3 */
+    .responsive-section h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #1d2833;
+      text-align: left;
+      font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    }
+
+    /* Styles for h2 */
+    .responsive-section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+      color: #1d2833;
+      text-align: left;
+      font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    }
+
+    /* Styles for p */
+    .responsive-section p {
+      font-size: 1.2857142857rem;
+      line-height: 1.875rem;
+      font-weight: 400;
+      color: #1d2833;
+      font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    /* Styles for Learn More link */
+    .responsive-section .learn-more1 {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.4;
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .responsive-section .learn-more1:hover {
+      text-decoration: underline;
+    }
+
+    /* Reveal Effect */
+    .reveal-text.revealed {
+      opacity: 1;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .responsive-section {
+        padding: 20px 5%;
+      }
+
+      .column1 {
+        width: 100%;
+        flex-direction: column;
+        margin-bottom: 20px; /* Added gap between columns */
+      }
+
+      .row1 {
+        gap: 5%;
+      }
+    }
+
+   
+
+    .reveal-text {
+      animation: reveal 1s ease-out forwards;
+    }
+
+    .reveal-text.revealed {
+      opacity: 1;
+    }
+
+
+
+
+    /* Scroll Up Button */
+#scrollUpBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#scrollUpBtn:hover {
+    background-color: #8e44ad;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        gap: 10px; /* Reduces gap between columns for small screens */
+    }
+
+    .contact-container .vertical-line {
+        display: none; /* Hides the vertical line on mobile */
+    }
+}
+        /* Footer Styling */
+        footer {
+            background-color: #f5f6f7;
+            padding: 56px 0;
+            /* Adjusted padding to avoid unnecessary horizontal spacing */
+            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            color: #333;
+            width: 100%;
+            /* Ensures full-width footer */
+            box-sizing: border-box;
+            /* Includes padding within the total width */
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            /* Ensures content has a maximum width for readability */
+            margin: 0 auto;
+            /* Centers the content horizontally */
+            padding: 0 14px;
+            /* Adds a small padding for inner content */
+        }
+
+        .footer-main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .column-left,
+        .column-right {
+            padding: 0 14px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin: 10px 0;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #4b0082;
+            font-weight: bold;
+            font-size: 1.3rem;
+            line-height: 1.5;
+        }
+
+        .footer-links a:hover {
+            color: #000;
+        }
+
+        /* Right Column */
+        .footer-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .text-row p {
+            text-align: left;
+            line-height: 1.81rem;
+            font-size: 1.28rem;
+        }
+
+        .text-row a {
+            color: #4b0082;
+            text-decoration: none;
+        }
+
+        .text-row a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Icons Section */
+        .footer-social {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            color: #4b0082;
+            font-size: 30px;
+            margin-right: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            color: #000;
+        }
+
+        /* Footer Bottom Section */
+        .footer-line {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        .legal-links a {
+            margin: 0 5px;
+            font-size: 1.12rem;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .legal-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-main {
+                flex-direction: column;
+                padding: 0 14px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .legal-links {
+                margin-top: 10px;
+            }
+        }
+        /* Styles for the wow section */
+.wow {
+  padding: 20px 15%; /* Left and right padding of 15%, top and bottom padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Align content vertically in the middle */
+  box-sizing: border-box;
+  flex-wrap: wrap; /* Ensure the content wraps on smaller screens */
+}
+
+.wow .text {
+  width: 48%; /* Takes up 48% of the width, leaving space for the image */
+}
+/* Styles for Learn More link */
+.wow .learn-more {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #007BFF;
+  text-decoration: none; /* No underline by default */
+}
+
+.wow .learn-more:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+.wow .text h2 {
+  font-size: 2.2857142858rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: #1d2833;
+  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+
+.wow .text p {
+  font-size: 1.2857142857rem;
+  line-height: 1.875rem;
+  font-weight: 400;
+  color: #1d2833;
+}
+
+.wow .image-container {
+  width: 48%; /* Takes up 48% of the width, next to text */
+}
+
+.wow .image-container img {
+  width: 100%; /* Ensure image takes up 100% of the container's width */
+  height: 300px; /* Fixed height */
+  object-fit: cover; /* Ensure the image is not stretched */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .wow {
+    padding: 20px 5%; /* Reduce padding on small screens */
+    flex-direction: column; /* Stack the text and image vertically */
+  }
+
+  .wow .text, .wow .image-container {
+    width: 100%; /* Full width for both text and image in small screens */
+    margin-bottom: 20px; /* Add spacing between text and image */
+  }
+
+  .wow .image-container img {
+    height: 200px; /* Adjust image height for smaller screens */
+  }
+}
+
+
+
+
+
+   /* Styles for Section 03 */
+   .section-03 {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 2rem;
+      padding-left: 10%;
+      padding-right: 10%;
+      flex-wrap: wrap;
+    }
+
+    .section-03-content {
+      max-width: 60%;
+      padding-right: 10%;
+    }
+
+    .section-03-heading {
+      font-size: 2.2857142858rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      color: #1d2833;
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    }
+
+    .section-03-paragraph {
+      font-size: 1.2857142857rem;
+      line-height: 1.875rem;
+      font-weight: 400;
+      color: #1d2833;
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-03-list {
+      font-size: 1.2857142857rem;
+      line-height: 1.875rem;
+      font-weight: 400;
+      color: #1d2833;
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      list-style-type: disc;
+      margin-left: 1.5rem;
+    }
+
+    .section-03-image {
+      max-width: 400px; /* Fixed width for image */
+      height: 300px;   /* Fixed height for image */
+      border-radius: 8px;
+      padding-top: 5%;  /* 5% top padding */
+    }
+
+    /* Blue link with arrow hover effect */
+    .section-03-link {
+      font-size: 1.2857142857rem;
+      color: #007bff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    }
+
+    .section-03-link:hover {
+      text-decoration: underline;
+    }
+
+    .section-03-link svg {
+      margin-left: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .section-03-link:hover svg {
+      transform: translateX(5px);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .section-03 {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .section-03-content {
+        max-width: 100%;
+        padding-right: 0;
+        text-align: justify;
+      }
+
+      .section-03-image {
+        max-width: 80%;
+        margin-top: 2rem; /* Give some spacing on top */
+      }
+    }
+
+
+
+     /* Parent container styling */
+     .section-container01 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 3rem 5rem;
+        /* Increased left and right padding */
+        background-color: #f4f6f8;
+    }
+
+    /* Content container */
+    .text-content01 {
+        flex: 1;
+        padding: 1rem 2rem;
+        /* Added some internal padding */
+    }
+
+    .text-content01 h2 {
+        font-size: 2.2857142858rem;
+        font-weight: 600;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+        color: #1d2833;
+        font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    }
+
+    .text-content01 p {
+        font-size: 1.2857142857rem;
+        line-height: 1.875rem;
+        font-weight: 400;
+        color: #1d2833;
+        margin-bottom: 1rem;
+        font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    }
+
+    .text-content01 a {
+        display: inline-block;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #0078d4;
+        text-decoration: none;
+        position: relative;
+        padding-right: 2rem;
+        margin-bottom: 1.5rem;
+        /* Added margin between links */
+        transition: color 0.3s ease;
+    }
+
+    .text-content01 a:hover {
+        color: #0056a3;
+    }
+
+    .text-content01 a::after {
+        content: '→';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        color: #0078d4;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .text-content01 a:hover::after {
+        transform: translate(0.3rem, -50%);
+        /* Moves the arrow slightly to the right */
+        color: #0056a3;
+    }
+
+    /* Image container */
+    .image-container01 {
+        flex: 1;
+        padding: 1rem 2rem;
+        /* Added some internal padding */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .image-container01 img {
+        width: 600px;
+        /* Fixed width */
+        height: 300px;
+        /* Fixed height */
+        /* border-radius: 0.5rem; */
+        object-fit: cover;
+        /* Ensures the image scales properly */
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .section-container01 {
+            flex-direction: column;
+            padding: 2rem 1rem;
+            /* Adjusted padding for smaller screens */
+        }
+
+        .text-content01,
+        .image-container01 {
+            padding: 1rem;
+        }
+
+        .text-content01 h2 {
+            font-size: 1.8rem;
+        }
+
+        .text-content01 p {
+            font-size: 1.1rem;
+        }
+
+        .image-container01 img {
+            width: 100%;
+            /* Full width on smaller screens */
+            height: auto;
+            /* Maintain aspect ratio */
+        }
+    }
+
+
+
+
+    /* General Styling for the Newsroom Section */
+    .newsroom-section {
+      padding: 2rem;
+      background-color: #ffffff;
+      font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    }
+
+    .newsroom-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    /* Newsroom Heading Styling */
+    .newsroom-heading {
+      font-size: 2.2857142858rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+      color: #1d2833;
+    }
+
+    /* Articles Grid */
+    .newsroom-articles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .newsroom-article {
+      background-color: #f9f9f9;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: grid;
+      grid-template-rows: auto auto auto;
+      gap: 1rem;
+    }
+
+    /* Article Title (H3) */
+    .newsroom-article-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 2rem;
+      color: #000;
+      margin-bottom: 1rem;
+    }
+
+    /* Article Content */
+    .newsroom-article-content {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #1d2833;
+    }
+
+    /* Continue Reading Link */
+    .newsroom-link {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+      margin: 0;
+      text-align: left;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .newsroom-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .newsroom-articles {
+        grid-template-columns: 1fr;
+      }
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Logo</div>
+            <ul class="nav-links">
+                <li><a href="/Index.html">Home</a></li>
+                <li><a href="/About.html">About</a></li>
+                <li><a href="/Solutions.html">Services</a></li>
+                <li><a href="/service1.html">Solution</a></li>
+                <li><a href="/Contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Empowering Innovation and Growth</h1>
+                </div>
+            </section>
+
+<!-- Stats Section -->
+<section class="stats">
+    <div class="stat">
+        <span>70+</span>
+        <p>countries</p>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="stat">
+        <span>125,000+</span>
+        <p>employees</p>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="stat">
+        <span>200</span>
+        <p>customers in the Fortune 500</p>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="stat">
+        <span>60+</span>
+        <p>years of innovation</p>
+    </div>
+</section>
+
+<!-- Video and Text Section -->
+<section class="video-text">
+    <div class="video">
+        <div class="video-thumbnail" onclick="openVideo()">
+            <img src="thumbnail.jpg" alt="Video Thumbnail">
+            <button class="play-button"></button>
+        </div>
+    </div>
+    <div class="text">
+        <h2>Innovative Solutions</h2>
+        <p>
+            We provide cutting-edge solutions to empower businesses and improve operational efficiency.
+            Our technology enables sustainable growth and fosters innovation across industries.
+        </p>
+    </div>
+</section>
+<section class="section-03">
+    <div class="section-03-content">
+      <h2 class="section-03-heading">DXC Technology in India</h2>
+      <p class="section-03-paragraph">
+        DXC Technology in India is a hotbed of innovation and technical expertise and a gold standard for process maturity and quality. Our operations are the company’s largest globally, employing high-caliber technology professionals focused on helping customers address their core challenges and take advantage of market opportunities.
+      </p>
+      <ul class="section-03-list">
+        <li>12 sites across 7 major cities in India</li>
+        <li>650+ customers</li>
+        <li>40+ years of experience</li>
+        <li>43,000+ talent base</li>
+        <li>One of the largest global delivery centers of DXC Technology worldwide</li>
+        <li>State of the art cybersecurity SOC with 24x7 monitoring</li>
+        <li>ISO20000, ISO27001, and CMMI Level 5 certified delivery sites</li>
+      </ul><br>
+      <a href="#" class="section-03-link">
+        DOWNLOAD THE DXC INDIA FACTSHEET
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h10.793L8.146 4.354a.5.5 0 1 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L12.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+        </svg>
+      </a>
+    </div>
+    <img src="/slide2.jpeg" alt="Cityscape" class="section-03-image">
+  </section>
+<!-- Video Popup -->
+<div class="video-popup" id="videoPopup">
+    <button class="close-button" onclick="closeVideo()">×</button>
+    <video src="video.mp4" controls></video>
+</div>
+
+<section class="section-container01">
+    <section class="text-content01">
+        <h2>Our Leaders</h2>
+        <p>Meet the executives delivering excellence for our customers, colleagues, and shareholders.</p>
+        <a href="#">EXECUTIVE LEADERSHIP</a><br>
+        <a href="#">BOARD OF DIRECTORS</a>
+    </section>
+    <section class="image-container01">
+        <img src="/slide1.jpeg" alt="Our leaders image">
+    </section>
+</section>
+<section class="responsive-section">
+    <h3>What we stand for</h3> 
+    <div class="container1">
+      <div class="row1">
+        <!-- Column 1 -->
+        <div class="column1">
+          <div class="image-column">
+            <img src="/innovation.jpg" alt="Image 1">
+          </div>
+          <div class="text-column border-top">
+            <h2>Section Title 1</h2>
+            <p class="reveal-text">This is the description for the first section. The text will reveal as you scroll down.</p><br>
+            <a href="#" class="learn-more1">Learn More</a>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="column1">
+          <div class="image-column">
+            <img src="/innovation.jpg" alt="Image 2">
+          </div>
+          <div class="text-column border-top">
+            <h2>Section Title 2</h2>
+            <p class="reveal-text">This is the description for the second section. The text will reveal as you scroll down.</p><br>
+            <a href="#" class="learn-more1">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="responsive-section">
+    <!-- //<h3>What we stand for</h3>  -->
+    <div class="container1">
+      <div class="row1">
+        <!-- Column 1 -->
+        <div class="column1">
+          <div class="image-column">
+            <img src="/innovation.jpg" alt="Image 1">
+          </div>
+          <div class="text-column border-top">
+            <h2>Section Title 1</h2>
+            <p class="reveal-text">This is the description for the first section. The text will reveal as you scroll down.</p><br>
+            <a href="#" class="learn-more1">Learn More</a>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="column1">
+          <div class="image-column">
+            <img src="/innovation.jpg" alt="Image 2">
+          </div>
+          <div class="text-column border-top">
+            <h2>Section Title 2</h2>
+            <p class="reveal-text">This is the description for the second section. The text will reveal as you scroll down.</p><br>
+            <a href="#" class="learn-more1">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-container01">
+    <section class="text-content01">
+        <h2>Our Leaders</h2>
+        <p>Meet the executives delivering excellence for our customers, colleagues, and shareholders.</p>
+        <a href="#">EXECUTIVE LEADERSHIP</a><br>
+        <a href="#">BOARD OF DIRECTORS</a>
+    </section>
+    <section class="image-container01">
+        <img src="/slide1.jpeg" alt="Our leaders image">
+    </section>
+</section>
+
+<section class="newsroom-section">
+    <div class="newsroom-container">
+      <h2 class="newsroom-heading">Newsroom</h2>
+      <div class="newsroom-articles">
+        <!-- Article 1 -->
+        <div class="newsroom-article">
+          <h3 class="newsroom-article-title">
+            DXC Luxoft and ECARX partnership boosts advanced innovation capabilities for automotive manufacturers
+          </h3>
+          <p class="newsroom-article-content">
+            ZUG, Switzerland, June 25, 2024 — ECARX (Nasdaq: ECX) and DXC Luxoft (NYSE: DXC) today announced they will work together to accelerate the development of in-vehicle capabilities, resulting in enhanced infotainment, digital cockpit and advanced driver assistance systems, and enabling a better user experience for drivers.
+          </p>
+          <a href="#" class="newsroom-link">Continue reading</a>
+        </div>
+        <!-- Article 2 -->
+        <div class="newsroom-article">
+          <h3 class="newsroom-article-title">
+            Dell Technologies Recognizes DXC Technology as Workplace Transformation Partner of the Year in Spain
+          </h3>
+          <p class="newsroom-article-content">
+            MADRID, SPAIN, June 21, 2024 — DXC Technology has been named Partner of the Year for Workplace Transformation by Dell Technologies, presented during Dell Channel Vision 2024 in Madrid, Spain.
+          </p>
+          <a href="#" class="newsroom-link">Continue reading</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="wow">
+    <div class="text">
+      <h2>Meet our Innovators</h2>
+      <p>Meet our honored technologists who achieve extraordinary results for customers and advance the state of the art for complex transformation.</p>
+      <br><br><a href="#" class="learn-more">Learn more</a>
+    </div>
+    <div class="image-container">
+      <img src="/innovators.jpeg" alt="Innovators Image">
+    </div>
+  </section>
+  
+    <section class="partner-section">
+        <div class="partner-logos">
+            <img src="/aws.png" alt="AWS">
+            <img src="/google.png"  alt="Google Cloud">
+            <img src="/micro.jpeg"  alt="Google Cloud">
+            <img src="/google.png"  alt="Google Cloud">
+            <img src="/google.png"  alt="Google Cloud">
+            <img src="/google.png"  alt="Google Cloud">
+        </div>
+        <div class="partner-content">
+            <h1 class="partner-heading">We partner with the best</h1>
+            <p class="partner-description">Combining strengths and our deep expertise, we deliver solutions that drive greater outcomes for our customers.</p>
+            <a href="#" class="partner-link">EXPLORE OUR PARTNER ECOSYSTEM</a>
+        </div>
+    </section>
+
+    <section class="section-connect">
+        <h2>Connect with DXC</h2>
+        <button class="contact-button">Contact Us</button>
+      </section>
+
+    <footer>
+        <div class="footer-container">
+            <!-- Main Section -->
+            <div class="footer-main">
+                <div class="column-left">
+                    <ul class="footer-links">
+                        <li><a href="#">ABOUT</a></li>
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="#">Solution</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="column-right">
+                    <div class="logo-row">
+                        <img src="logo.png" alt="DXC Logo" class="footer-logo">
+                    </div>
+                    <div class="text-row">
+                        <p>
+                            DXC Technology (NYSE: DXC) helps global companies run their mission-critical systems and
+                            operations while
+                            modernizing IT, optimizing data architectures, and ensuring security and scalability across
+                            public, private, and
+                            hybrid clouds. The world's largest companies and public sector organizations trust DXC to
+                            deploy services to drive
+                            new levels of performance, competitiveness, and customer experience across their IT estates.
+                            Learn more about how
+                            we deliver excellence for our customers and colleagues at <a href="https://dxc.com"
+                                target="_blank">DXC.com</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Icons Section -->
+            <div class="footer-social">
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Section -->
+            <hr class="footer-line">
+            <div class="footer-bottom">
+                <p class="copyright">© DXC Technology Company</p>
+                <div class="legal-links">
+                    <a href="#">Cookies</a> |
+                    <a href="#">Terms</a> |
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+ 
+ 
+    <!-- Scroll Up Button -->
+<button id="scrollUpBtn" title="Scroll to Top">↑</button>
+    
+
+
+
+
+
+<script src="script.js"></script>
+    <script>
+      
+        
+        // Scroll Up Button Functionality
+        var scrollUpBtn = document.getElementById("scrollUpBtn");
+        
+        // When the user scrolls down 100px from the top of the document, show the button
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollUpBtn.style.display = "block";
+            } else {
+                scrollUpBtn.style.display = "none";
+            }
+        };
+        
+        // When the user clicks on the button, scroll to the top of the document
+        scrollUpBtn.addEventListener("click", function() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        </script>
+
+<script>
+    function openVideo() {
+        document.getElementById('videoPopup').style.display = 'flex';
+    }
+
+    function closeVideo() {
+        document.getElementById('videoPopup').style.display = 'none';
+    }
+</script>
+<script>
+    window.addEventListener('scroll', function() {
+      const revealTexts = document.querySelectorAll('.reveal-text');
+      revealTexts.forEach(function(revealText) {
+        const revealPosition = revealText.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight;
+
+        if (revealPosition < screenPosition) {
+          revealText.classList.add('revealed');
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>

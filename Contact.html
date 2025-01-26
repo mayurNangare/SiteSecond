@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Footer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+    <style>
+        /* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;      
+
+}
+
+/* Header Styles */
+header {
+            background-color: #ffffff;
+            color: #000;
+            padding: 15px 20px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            background-color: black;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .hamburger.close span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.close span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.close span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #333;
+                width: 100%;
+                z-index: 10;
+                padding: 20px 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .nav-links a {
+                color: white;
+                padding: 10px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+/* Contact Us Section */
+.contact-us {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px;
+    flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
+}
+
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Contact Form Box */
+.contact-form {
+    flex: 1;
+    background-color: #ffffff; /* Same background color */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Heading for Contact Form */
+.contact-form h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+
+}
+
+/* Form Labels */
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 400;
+    line-height: 2rem;
+    font-size: 1.2857142857rem;
+}
+
+/* Form Inputs */
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Submit Button */
+.contact-form button {
+    padding: 10px 20px;
+    background-color: #5c2d91;
+    color: white;
+    border: none;
+    /* border-radius: 5px; */
+    cursor: pointer;
+}
+
+/* Hover Effect for Button */
+.contact-form button:hover {
+    background-color: #8e44ad;
+}
+
+/* Vertical Line - Position it within the gap */
+.contact-container .vertical-line {
+    width: 2px;
+    background-color: #9b59b6;
+    height: auto;
+    margin: 0 20px; /* Add gap between the columns */
+    border-left: 2px solid #9b59b6; /* Adds the actual vertical line */
+}
+
+/* Map Box */
+.map {
+    flex: 1;
+    background-color: #ffffff; /* Same background color */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Scroll Up Button */
+#scrollUpBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#scrollUpBtn:hover {
+    background-color: #8e44ad;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        gap: 10px; /* Reduces gap between columns for small screens */
+    }
+
+    .contact-container .vertical-line {
+        display: none; /* Hides the vertical line on mobile */
+    }
+}
+.section-explore {
+      background-color: #f5f7fa;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .section-explore p {
+      font-size: 20px;
+      margin: 0;
+      color: #333;
+    }
+
+    .section-explore a {
+      color: #0078d4;
+      text-decoration: none;
+    }
+
+    .section-explore a:hover {
+      text-decoration: underline;
+    }
+
+    section.section-connect {
+      background-color: #5c2d91;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 10%;  /* 10% padding on left and right */
+    }
+
+    section.section-connect h2 {
+      margin: 0;
+      font-size: 2.2857142858rem;  /* Updated font size */
+      font-weight: 600;            /* Updated font weight */
+      line-height: 1.2;            /* Updated line height */
+    }
+
+    .contact-button {
+      background: none;
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 1rem;             /* Updated font size */
+      font-weight: 700;            /* Updated font weight */
+      letter-spacing: 0.0375rem;   /* Updated letter spacing */
+      line-height: 1.5;            /* Updated line height */
+      text-align: center;          /* Centered text */
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .custom-button {
+    font-size: 1.2857142857rem;
+  }
+    .contact-button:hover {
+      background-color: #fff;
+      color: #5c2d91;
+    }
+
+    @media (max-width: 768px) {
+      section.section-connect {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
+      .contact-button {
+        width: 100%;
+        max-width: 200px;
+      }
+    }
+        /* Footer Styling */
+        footer {
+            background-color: #f5f6f7;
+            padding: 56px 0;
+            /* Adjusted padding to avoid unnecessary horizontal spacing */
+            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            color: #333;
+            width: 100%;
+            /* Ensures full-width footer */
+            box-sizing: border-box;
+            /* Includes padding within the total width */
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            /* Ensures content has a maximum width for readability */
+            margin: 0 auto;
+            /* Centers the content horizontally */
+            padding: 0 14px;
+            /* Adds a small padding for inner content */
+        }
+
+        .footer-main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .column-left,
+        .column-right {
+            padding: 0 14px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin: 10px 0;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #4b0082;
+            font-weight: bold;
+            font-size: 1.3rem;
+            line-height: 1.5;
+        }
+
+        .footer-links a:hover {
+            color: #000;
+        }
+
+        /* Right Column */
+        .footer-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .text-row p {
+            text-align: left;
+            line-height: 1.81rem;
+            font-size: 1.28rem;
+        }
+
+        .text-row a {
+            color: #4b0082;
+            text-decoration: none;
+        }
+
+        .text-row a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Icons Section */
+        .footer-social {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            color: #4b0082;
+            font-size: 30px;
+            margin-right: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            color: #000;
+        }
+
+        /* Footer Bottom Section */
+        .footer-line {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        .legal-links a {
+            margin: 0 5px;
+            font-size: 1.12rem;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .legal-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-main {
+                flex-direction: column;
+                padding: 0 14px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .legal-links {
+                margin-top: 10px;
+            }
+        }
+
+
+        
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Logo</div>
+            <ul class="nav-links">
+                <li><a href="/Index.html">Home</a></li>
+                <li><a href="/About.html">About</a></li>
+                <li><a href="/Solutions.html">Services</a></li>
+                <li><a href="/service1.html">Solution</a></li>
+                <li><a href="/Contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+    <!-- Contact Us Section -->
+<section class="contact-us">
+    <div class="contact-container">
+        <!-- First Column (Contact Form) -->
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <form id="contactForm" action="https://api.whatsapp.com/send?phone=+18310214624&text=" method="get" target="_blank">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit" class="custom-button">Send</button>
+            </form>
+        </div>
+
+        <!-- Vertical Line (Placed between columns) -->
+        <div class="vertical-line"></div>
+
+        <!-- Second Column (Map) -->
+        <div class="map">
+            <h2>Our Location</h2>
+            <!-- Leaflet Map -->
+            <div id="map" style="height: 400px;"></div>
+        </div>
+    </div>
+</section>
+<section class="section-connect">
+    <h2>Connect with DXC</h2>
+    <button class="contact-button">Contact Us</button>
+  </section>
+    <footer>
+        <div class="footer-container">
+            <!-- Main Section -->
+            <div class="footer-main">
+                <div class="column-left">
+                    <ul class="footer-links">
+                        <li><a href="#">ABOUT</a></li>
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="#">Solution</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="column-right">
+                    <div class="logo-row">
+                        <img src="logo.png" alt="DXC Logo" class="footer-logo">
+                    </div>
+                    <div class="text-row">
+                        <p>
+                            DXC Technology (NYSE: DXC) helps global companies run their mission-critical systems and
+                            operations while
+                            modernizing IT, optimizing data architectures, and ensuring security and scalability across
+                            public, private, and
+                            hybrid clouds. The world's largest companies and public sector organizations trust DXC to
+                            deploy services to drive
+                            new levels of performance, competitiveness, and customer experience across their IT estates.
+                            Learn more about how
+                            we deliver excellence for our customers and colleagues at <a href="https://dxc.com"
+                                target="_blank">DXC.com</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Icons Section -->
+            <div class="footer-social">
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Section -->
+            <hr class="footer-line">
+            <div class="footer-bottom">
+                <p class="copyright">© DXC Technology Company</p>
+                <div class="legal-links">
+                    <a href="#">Cookies</a> |
+                    <a href="#">Terms</a> |
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll Up Button -->
+<button id="scrollUpBtn" title="Scroll to Top">↑</button>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+// Initialize Leaflet map
+var map = L.map('map').setView([25.276987, 55.296249], 13); // Coordinates for Dubai, UAE
+
+// Set up the tile layer (OpenStreetMap)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// Add a marker to the map at the given coordinates (for the address)
+L.marker([25.276987, 55.296249]).addTo(map)
+    .bindPopup("<b>HASHXPERT TECHNOLOGIES LLC</b><br>No 12, 2nd Floor, Czar Business Center, DIP 1<br>Dubai, UAE")
+    .openPopup();
+
+// Scroll Up Button Functionality
+var scrollUpBtn = document.getElementById("scrollUpBtn");
+
+// When the user scrolls down 100px from the top of the document, show the button
+window.onscroll = function() {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        scrollUpBtn.style.display = "block";
+    } else {
+        scrollUpBtn.style.display = "none";
+    }
+};
+
+// When the user clicks on the button, scroll to the top of the document
+scrollUpBtn.addEventListener("click", function() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
+    <script src="script.js"></script>
+</body>
+
+</html>

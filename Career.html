@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Footer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+}
+
+header .logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding-bottom: 5px;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+/* Hover Effects */
+.nav-links a:hover {
+    color: #9b59b6;
+    border-bottom: 2px solid #9b59b6;
+}
+
+/* Dropdown */
+/* Dropdown */
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding around list items */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+}
+
+.hamburger.close .bar:nth-child(1) {
+    transform: rotate(45deg);
+    position: relative;
+    top: 8px;
+}
+
+.hamburger.close .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.close .bar:nth-child(3) {
+    transform: rotate(-45deg);
+    position: relative;
+    top: -8px;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        display: none;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #333;
+        flex-direction: column;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 10px 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .navbar.active {
+        display: flex;
+    }
+
+    .dropdown-content {
+        left: 0;
+    }
+}
+        /* Footer Styling */
+        footer {
+            background-color: #f5f6f7;
+            padding: 56px 0;
+            /* Adjusted padding to avoid unnecessary horizontal spacing */
+            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            color: #333;
+            width: 100%;
+            /* Ensures full-width footer */
+            box-sizing: border-box;
+            /* Includes padding within the total width */
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            /* Ensures content has a maximum width for readability */
+            margin: 0 auto;
+            /* Centers the content horizontally */
+            padding: 0 14px;
+            /* Adds a small padding for inner content */
+        }
+
+        .footer-main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .column-left,
+        .column-right {
+            padding: 0 14px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin: 10px 0;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #4b0082;
+            font-weight: bold;
+            font-size: 1.3rem;
+            line-height: 1.5;
+        }
+
+        .footer-links a:hover {
+            color: #000;
+        }
+
+        /* Right Column */
+        .footer-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .text-row p {
+            text-align: left;
+            line-height: 1.81rem;
+            font-size: 1.28rem;
+        }
+
+        .text-row a {
+            color: #4b0082;
+            text-decoration: none;
+        }
+
+        .text-row a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Icons Section */
+        .footer-social {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            color: #4b0082;
+            font-size: 20px;
+            margin-right: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            color: #000;
+        }
+
+        /* Footer Bottom Section */
+        .footer-line {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        .legal-links a {
+            margin: 0 5px;
+            font-size: 1.12rem;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .legal-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-main {
+                flex-direction: column;
+                padding: 0 14px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .legal-links {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="#">Your Logo</a>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li class="dropdown">
+                    <a href="#">Solutions</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Solution 1</a></li>
+                        <li><a href="#">Solution 2</a></li>
+                        <li><a href="#">Solution 3</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Target Groups</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </header>
+    <footer>
+        <div class="footer-container">
+            <!-- Main Section -->
+            <div class="footer-main">
+                <div class="column-left">
+                    <ul class="footer-links">
+                        <li><a href="#">Effects</a></li>
+                        <li><a href="#">Service</a></li>
+                        <li><a href="#">Solution</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="column-right">
+                    <div class="logo-row">
+                        <img src="logo.png" alt="DXC Logo" class="footer-logo">
+                    </div>
+                    <div class="text-row">
+                        <p>
+                            DXC Technology (NYSE: DXC) helps global companies run their mission-critical systems and
+                            operations while
+                            modernizing IT, optimizing data architectures, and ensuring security and scalability across
+                            public, private, and
+                            hybrid clouds. The world's largest companies and public sector organizations trust DXC to
+                            deploy services to drive
+                            new levels of performance, competitiveness, and customer experience across their IT estates.
+                            Learn more about how
+                            we deliver excellence for our customers and colleagues at <a href="https://dxc.com"
+                                target="_blank">DXC.com</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Icons Section -->
+            <div class="footer-social">
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Section -->
+            <hr class="footer-line">
+            <div class="footer-bottom">
+                <p class="copyright">© DXC Technology Company</p>
+                <div class="legal-links">
+                    <a href="#">Cookies</a> |
+                    <a href="#">Terms</a> |
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- Scroll Up Button -->
+<button id="scrollUpBtn" title="Scroll to Top">↑</button>
+    <script src="script.js"></script>
+    <script>
+      
+        
+        // Scroll Up Button Functionality
+        var scrollUpBtn = document.getElementById("scrollUpBtn");
+        
+        // When the user scrolls down 100px from the top of the document, show the button
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollUpBtn.style.display = "block";
+            } else {
+                scrollUpBtn.style.display = "none";
+            }
+        };
+        
+        // When the user clicks on the button, scroll to the top of the document
+        scrollUpBtn.addEventListener("click", function() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        </script>
+</body>
+
+</html>
