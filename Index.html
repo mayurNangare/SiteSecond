@@ -1,1248 +1,1292 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Responsive Footer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <style>
-        /* Reset default browser styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;      
+      /* Reset default browser styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI,
+          Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif,
+          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      }
 
-        }
+      /* Header Styles */
+      header {
+        background-color: #ffffff;
+        color: #000;
+        padding: 15px 20px;
+      }
 
-        /* Header Styles */
-        header {
-            background-color: #ffffff;
-            color: #000;
-            padding: 15px 20px;
-        }
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+      }
 
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-        }
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+      }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
 
+      .nav-links li {
+        margin: 0 15px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+        padding: 5px;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #007bff;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 25px;
+        cursor: pointer;
+      }
+
+      .hamburger span {
+        display: block;
+        height: 3px;
+        background-color: black;
+        border-radius: 2px;
+        transition: transform 0.3s, opacity 0.3s;
+      }
+
+      .hamburger.close span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .hamburger.close span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.close span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      @media (max-width: 768px) {
         .nav-links {
-            display: flex;
-            list-style: none;
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 60px;
+          left: 0;
+          background-color: #333;
+          width: 100%;
+          z-index: 10;
+          padding: 20px 0;
+        }
+
+        .nav-links.active {
+          display: flex;
         }
 
         .nav-links li {
-            margin: 0 15px;
+          margin: 10px 0;
+          text-align: center;
         }
 
         .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-size: 16px;
-            padding: 5px;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #007bff;
+          color: white;
+          padding: 10px;
         }
 
         .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 25px;
-            cursor: pointer;
+          display: flex;
+        }
+      }
+      /* Scroll Up Button */
+      #scrollUpBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #4a148c;
+        color: white;
+        border: none;
+        padding: 15px;
+        font-size: 18px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      #scrollUpBtn:hover {
+        background-color: #8e44ad;
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
+        .contact-container {
+          flex-direction: column;
+          gap: 10px;
+          /* Reduces gap between columns for small screens */
         }
 
-        .hamburger span {
-            display: block;
-            height: 3px;
-            background-color: black;
-            border-radius: 2px;
-            transition: transform 0.3s, opacity 0.3s;
+        .contact-container .vertical-line {
+          display: none;
+          /* Hides the vertical line on mobile */
+        }
+      }
+
+      /* Hero Section */
+      section.hero {
+        position: relative;
+        width: 100%;
+        height: 70vh;
+        overflow: hidden;
+      }
+
+      section.hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      section.hero img.active {
+        opacity: 1;
+      }
+
+      section.hero .hero-content {
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        transform: translateY(-50%);
+        color: #ffffff;
+        text-align: left;
+        animation: text-reveal 1.5s ease-in-out;
+      }
+
+      section.hero .hero-content h1 {
+        font-size: 2.2857142858rem;
+        font-weight: 600;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+      }
+
+      section.hero .hero-content p {
+        font-size: 1.2857142857rem;
+        margin-bottom: 1rem;
+        margin-top: 0;
+        line-height: 1.875rem;
+        font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI,
+          Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif,
+          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      }
+
+      section.hero .arrow {
+        position: absolute;
+        top: 50%;
+        width: 60px;
+        height: 60px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        font-size: 2rem;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 10;
+        transform: translateY(-50%);
+      }
+
+      section.hero .arrow.left {
+        left: 10px;
+      }
+
+      section.hero .arrow.right {
+        right: 10px;
+      }
+
+      @keyframes text-reveal {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
         }
 
-        .hamburger.close span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+        100% {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
 
-        .hamburger.close span:nth-child(2) {
-            opacity: 0;
-        }
+      /* News Section */
+      section.news {
+        background-color: #4a148c;
+        color: white;
+        padding: 10px;
+        position: relative;
+        height: 150px;
+        /* Reduced height */
+      }
 
-        .hamburger.close span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
+      section.news .news-carousel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        overflow: hidden;
+      }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                background-color: #333;
-                width: 100%;
-                z-index: 10;
-                padding: 20px 0;
-            }
+      section.news .news-item {
+        flex: 0 0 100%;
+        text-align: center;
+        font-size: 1.2rem;
+        transition: transform 1s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-            .nav-links.active {
-                display: flex;
-            }
+      section.news .arrow {
+        position: absolute;
+        top: 50%;
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        font-size: 1.5rem;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 10;
+        transform: translateY(-50%);
+      }
 
-            .nav-links li {
-                margin: 10px 0;
-                text-align: center;
-            }
+      section.news .arrow.left {
+        left: 10px;
+      }
 
-            .nav-links a {
-                color: white;
-                padding: 10px;
-            }
+      section.news .arrow.right {
+        right: 10px;
+      }
 
-            .hamburger {
-                display: flex;
-            }
-        }
-        /* Scroll Up Button */
-        #scrollUpBtn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #4A148C;
-            color: white;
-            border: none;
-            padding: 15px;
-            font-size: 18px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+      section.news .news-footer {
+        text-align: center;
+        margin-top: 10px;
+      }
 
-        #scrollUpBtn:hover {
-            background-color: #8e44ad;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .contact-container {
-                flex-direction: column;
-                gap: 10px;
-                /* Reduces gap between columns for small screens */
-            }
-
-            .contact-container .vertical-line {
-                display: none;
-                /* Hides the vertical line on mobile */
-            }
-        }
-
-        /* Hero Section */
-        section.hero {
-            position: relative;
-            width: 100%;
-            height: 70vh;
-            overflow: hidden;
-        }
-
-        section.hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
-        section.hero img.active {
-            opacity: 1;
-        }
-
-        section.hero .hero-content {
-            position: absolute;
-            top: 50%;
-            left: 10%;
-            transform: translateY(-50%);
-            color: #ffffff;
-            text-align: left;
-            animation: text-reveal 1.5s ease-in-out;
-        }
-
+      /* Responsive Design */
+      @media (max-width: 768px) {
         section.hero .hero-content h1 {
-            font-size: 2.2857142858rem;
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: .5rem;
+          font-size: 2rem;
         }
 
         section.hero .hero-content p {
-            font-size: 1.2857142857rem;
-            margin-bottom: 1rem;
-            margin-top: 0;
-            line-height: 1.875rem;
-            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+          font-size: 1rem;
         }
 
         section.hero .arrow {
-            position: absolute;
-            top: 50%;
-            width: 60px;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            font-size: 2rem;
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 10;
-            transform: translateY(-50%);
+          width: 40px;
+          height: 40px;
         }
 
-        section.hero .arrow.left {
-            left: 10px;
-        }
-
-        section.hero .arrow.right {
-            right: 10px;
-        }
-
-        @keyframes text-reveal {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* News Section */
         section.news {
-            background-color: #4A148C;
-            color: white;
-            padding: 10px;
-            position: relative;
-            height: 150px;
-            /* Reduced height */
-        }
-
-        section.news .news-carousel {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        section.news .news-item {
-            flex: 0 0 100%;
-            text-align: center;
-            font-size: 1.2rem;
-            transition: transform 1s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+          height: 120px;
+          /* Further reduce height for smaller screens */
         }
 
         section.news .arrow {
-            position: absolute;
-            top: 50%;
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            font-size: 1.5rem;
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 10;
-            transform: translateY(-50%);
+          width: 30px;
+          height: 30px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        section.hero .hero-content h1 {
+          font-size: 1.5rem;
         }
 
-        section.news .arrow.left {
-            left: 10px;
+        section.hero .hero-content p {
+          font-size: 0.8rem;
         }
 
-        section.news .arrow.right {
-            right: 10px;
+        section.news {
+          height: 100px;
+          /* Minimum height for mobile devices */
         }
+      }
 
-        section.news .news-footer {
-            text-align: center;
-            margin-top: 10px;
-        }
+      /* Section Styles */
+      /* Section Styles */
+      .vision-mission {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f9f9f9;
+      }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            section.hero .hero-content h1 {
-                font-size: 2rem;
-            }
+      /* Container Styles */
+      .vision-mission .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
 
-            section.hero .hero-content p {
-                font-size: 1rem;
-            }
+      /* Row Styles */
+      .vision-mission .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        /* Increase gap between columns */
+      }
 
-            section.hero .arrow {
-                width: 40px;
-                height: 40px;
-            }
+      /* Left Column Text Styles */
+      .vision-mission-text {
+        padding-right: 20px;
+      }
 
-            section.news {
-                height: 120px;
-                /* Further reduce height for smaller screens */
-            }
+      /* Vision and Mission Text */
+      .vision-mission h2 {
+        font-size: 2.2857142858rem;
+        font-weight: 600;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+        color: #1d2833;
+        font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI,
+          Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif,
+          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      }
 
-            section.news .arrow {
-                width: 30px;
-                height: 30px;
-            }
-        }
+      /* Increase gap between Vision and Mission */
+      .vision-mission .vision,
+      .vision-mission .mission {
+        margin-bottom: 30px;
+        /* Increased gap between Vision and Mission */
+      }
 
-        @media (max-width: 480px) {
-            section.hero .hero-content h1 {
-                font-size: 1.5rem;
-            }
+      /* Horizontal Line */
+      .vision-mission hr {
+        width: 100%;
+        /* Full width of the column */
+        border: 1px solid #7f7f7f;
+        margin-bottom: 20px;
+      }
 
-            section.hero .hero-content p {
-                font-size: 0.8rem;
-            }
+      /* Paragraph Styles */
+      .vision-mission p {
+        font-size: 1.2857142857rem;
+        line-height: 1.875rem;
+        font-weight: 400;
+        color: #1d2833;
+        font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI,
+          Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif,
+          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        color: #555;
+      }
 
-            section.news {
-                height: 100px;
-                /* Minimum height for mobile devices */
-            }
-        }
+      /* Right Column Image Styles (For Larger Screens) */
+      .vision-mission-image img {
+        width: 500px;
+        /* Fixed width for larger screens */
+        height: 300px;
+        /* Fixed height */
+        object-fit: cover;
+        /* Maintain aspect ratio and cover the area */
+        /* border-radius: 8px; */
+      }
 
-        /* Section Styles */
-        /* Section Styles */
-        .vision-mission {
-            padding-top: 40px;
-            padding-bottom: 40px;
-            background-color: #f9f9f9;
-        }
-
-        /* Container Styles */
-        .vision-mission .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Row Styles */
+      /* Responsive Styles */
+      @media (max-width: 767px) {
         .vision-mission .row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            /* Increase gap between columns */
+          flex-direction: column;
+          gap: 20px;
+          /* Reduce gap on smaller screens */
         }
 
-        /* Left Column Text Styles */
         .vision-mission-text {
-            padding-right: 20px;
+          padding-right: 0;
+          padding-left: 15px;
+          /* Add left padding on small screens */
+          padding-right: 15px;
+          /* Add right padding on small screens */
         }
 
-        /* Vision and Mission Text */
         .vision-mission h2 {
-            font-size: 2.2857142858rem;
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: .5rem;
-            color: #1d2833;
-            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+          font-size: 20px;
         }
 
-        /* Increase gap between Vision and Mission */
-        .vision-mission .vision,
-        .vision-mission .mission {
-            margin-bottom: 30px;
-            /* Increased gap between Vision and Mission */
-        }
-
-        /* Horizontal Line */
-        .vision-mission hr {
-            width: 100%;
-            /* Full width of the column */
-            border: 1px solid #7f7f7f;
-            margin-bottom: 20px;
-        }
-
-        /* Paragraph Styles */
         .vision-mission p {
-            font-size: 1.2857142857rem;
-            line-height: 1.875rem;
-            font-weight: 400;
-            color: #1d2833;
-            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-            color: #555;
-
+          font-size: 14px;
         }
 
-        /* Right Column Image Styles (For Larger Screens) */
+        /* Center the image in mobile view */
+        .vision-mission-image {
+          display: flex;
+          justify-content: center;
+          /* Center the image horizontally */
+          align-items: center;
+          /* Center the image vertically */
+          text-align: center;
+          /* Center the content inside the column */
+          width: 100%;
+          /* Take up full width */
+        }
+
         .vision-mission-image img {
-            width: 500px;
-            /* Fixed width for larger screens */
-            height: 300px;
-            /* Fixed height */
-            object-fit: cover;
-            /* Maintain aspect ratio and cover the area */
-            /* border-radius: 8px; */
+          width: 200px;
+          /* Adjust image width for smaller screens */
+          height: 200px;
+          /* Adjust image height for smaller screens */
+          max-width: 100%;
+          /* Ensure the image is responsive */
         }
+      }
 
-        /* Responsive Styles */
-        @media (max-width: 767px) {
-            .vision-mission .row {
-                flex-direction: column;
-                gap: 20px;
-                /* Reduce gap on smaller screens */
-            }
+      /* About Us Section */
+      .about-us {
+        padding: 60px 0;
+        background-color: #f9f9f9;
+      }
 
-            .vision-mission-text {
-                padding-right: 0;
-                padding-left: 15px;
-                /* Add left padding on small screens */
-                padding-right: 15px;
-                /* Add right padding on small screens */
-            }
+      /* Container Styles */
+      .about-us .container66 {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
 
-            .vision-mission h2 {
-                font-size: 20px;
-            }
+      /* Row Styles */
+      .about-us .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        /* Gap between columns */
+      }
 
-            .vision-mission p {
-                font-size: 14px;
-            }
+      /* Left Column Text Styles */
+      .about-us-text {
+        padding-right: 20px;
+      }
 
-            /* Center the image in mobile view */
-            .vision-mission-image {
-                display: flex;
-                justify-content: center;
-                /* Center the image horizontally */
-                align-items: center;
-                /* Center the image vertically */
-                text-align: center;
-                /* Center the content inside the column */
-                width: 100%;
-                /* Take up full width */
-            }
+      /* About Us Text Styles */
+      .about-us h2 {
+        font-size: 2.2857142858rem;
+        font-weight: 600;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        color: #1d2833;
+        font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI,
+          Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif,
+          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      }
 
-            .vision-mission-image img {
-                width: 200px;
-                /* Adjust image width for smaller screens */
-                height: 200px;
-                /* Adjust image height for smaller screens */
-                max-width: 100%;
-                /* Ensure the image is responsive */
-            }
-        }
+      .about-us p {
+        font-size: 1.2857142857rem;
+        line-height: 1.875rem;
+        font-weight: 400;
+        color: #1d2833;
+        font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI,
+          Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif,
+          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 
-        /* About Us Section */
-        .about-us {
-            padding: 60px 0;
-            background-color: #f9f9f9;
-        }
+        color: #555;
 
-        /* Container Styles */
-        .about-us .container66 {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        margin-bottom: 20px;
+      }
 
-        /* Row Styles */
+      /* Responsive Styles */
+      @media (max-width: 767px) {
         .about-us .row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            /* Gap between columns */
+          flex-direction: column;
+          gap: 20px;
+          /* Adjust gap on smaller screens */
         }
 
-        /* Left Column Text Styles */
         .about-us-text {
-            padding-right: 20px;
+          padding-right: 0;
+          padding-left: 15px;
+          /* Add left padding on small screens */
+          padding-right: 15px;
+          /* Add right padding on small screens */
         }
 
-        /* About Us Text Styles */
         .about-us h2 {
-            font-size: 2.2857142858rem;
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            color: #1d2833;
-            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-
+          font-size: 24px;
         }
 
         .about-us p {
-            font-size: 1.2857142857rem;
-            line-height: 1.875rem;
-            font-weight: 400;
-            color: #1d2833;
-            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-
-            color: #555;
-
-            margin-bottom: 20px;
+          font-size: 14px;
         }
+      }
 
-        /* Responsive Styles */
-        @media (max-width: 767px) {
-            .about-us .row {
-                flex-direction: column;
-                gap: 20px;
-                /* Adjust gap on smaller screens */
-            }
+      .section-explore {
+        background-color: #f5f7fa;
+        text-align: center;
+        padding: 20px 0;
+      }
 
-            .about-us-text {
-                padding-right: 0;
-                padding-left: 15px;
-                /* Add left padding on small screens */
-                padding-right: 15px;
-                /* Add right padding on small screens */
-            }
+      .section-explore p {
+        font-size: 20px;
+        margin: 0;
+        color: #333;
+      }
 
-            .about-us h2 {
-                font-size: 24px;
-            }
+      .section-explore a {
+        color: #0078d4;
+        text-decoration: none;
+      }
 
-            .about-us p {
-                font-size: 14px;
-            }
-        }
+      .section-explore a:hover {
+        text-decoration: underline;
+      }
 
-        .section-explore {
-            background-color: #f5f7fa;
-            text-align: center;
-            padding: 20px 0;
-        }
+      section.section-connect {
+        background-color: #5c2d91;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 10%;
+        /* 10% padding on left and right */
+      }
 
-        .section-explore p {
-            font-size: 20px;
-            margin: 0;
-            color: #333;
-        }
+      section.section-connect h2 {
+        margin: 0;
+        font-size: 2.2857142858rem;
+        /* Updated font size */
+        font-weight: 600;
+        /* Updated font weight */
+        line-height: 1.2;
+        /* Updated line height */
+      }
 
-        .section-explore a {
-            color: #0078d4;
-            text-decoration: none;
-        }
+      .contact-button {
+        background: none;
+        border: 2px solid #fff;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 1rem;
+        /* Updated font size */
+        font-weight: 700;
+        /* Updated font weight */
+        letter-spacing: 0.0375rem;
+        /* Updated letter spacing */
+        line-height: 1.5;
+        /* Updated line height */
+        text-align: center;
+        /* Centered text */
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
 
-        .section-explore a:hover {
-            text-decoration: underline;
-        }
+      .contact-button:hover {
+        background-color: #fff;
+        color: #5c2d91;
+      }
 
+      @media (max-width: 768px) {
         section.section-connect {
-            background-color: #5c2d91;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 10%;
-            /* 10% padding on left and right */
-        }
-
-        section.section-connect h2 {
-            margin: 0;
-            font-size: 2.2857142858rem;
-            /* Updated font size */
-            font-weight: 600;
-            /* Updated font weight */
-            line-height: 1.2;
-            /* Updated line height */
+          flex-direction: column;
+          text-align: center;
+          gap: 15px;
         }
 
         .contact-button {
-            background: none;
-            border: 2px solid #fff;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 1rem;
-            /* Updated font size */
-            font-weight: 700;
-            /* Updated font weight */
-            letter-spacing: 0.0375rem;
-            /* Updated letter spacing */
-            line-height: 1.5;
-            /* Updated line height */
-            text-align: center;
-            /* Centered text */
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
+          width: 100%;
+          max-width: 200px;
         }
+      }
 
-        .contact-button:hover {
-            background-color: #fff;
-            color: #5c2d91;
-        }
+      /* Scoped CSS for container55 */
+      .container55 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4% 8%;
+        gap: 3%;
+        flex-wrap: wrap;
+      }
 
-        @media (max-width: 768px) {
-            section.section-connect {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
-            }
+      .container55 .left-column,
+      .container55 .right-column {
+        padding: 2%;
+      }
 
-            .contact-button {
-                width: 100%;
-                max-width: 200px;
-            }
-        }
+      .container55 .left-column {
+        flex: 1 1 45%;
+      }
 
-        /* Scoped CSS for container55 */
+      .container55 .left-column h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #1d2833;
+      }
+
+      .container55 .left-column p {
+        font-size: 1.2857142857rem;
+        margin-bottom: 1rem;
+        margin-top: 0;
+        color: #1d2833;
+        font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI,
+          Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif,
+          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+
+        line-height: 1.8;
+      }
+
+      .container55 .left-column .button {
+        display: inline-block;
+        background-color: #007bff;
+        /* Blue background */
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      .container55 .left-column .button:hover {
+        background-color: #0056b3;
+        /* Darker blue on hover */
+      }
+
+      .container55 .right-column {
+        flex: 1 1 50%;
+      }
+
+      .container55 .right-column img {
+        width: 500px;
+        height: 364px;
+        object-fit: cover;
+        /* Ensures the image maintains the aspect ratio and fills the space */
+        border-radius: 5px;
+        /* Optional: Rounded corners for the image */
+      }
+
+      /* Responsive styles for smaller screens */
+      @media (max-width: 1200px) {
         .container55 {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 4% 8%;
-            gap: 3%;
-            flex-wrap: wrap;
+          padding: 5%;
+          flex-direction: column;
+          text-align: center;
         }
 
         .container55 .left-column,
         .container55 .right-column {
-            padding: 2%;
-        }
-
-        .container55 .left-column {
-            flex: 1 1 45%;
+          flex: 1 1 100%;
         }
 
         .container55 .left-column h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            color: #1d2833;
+          font-size: 2rem;
         }
 
         .container55 .left-column p {
-            font-size: 1.2857142857rem;
-    margin-bottom: 1rem;
-    margin-top: 0;
-    color: #1d2833;
-    font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-            
-            line-height: 1.8;
-        }
-
-        .container55 .left-column .button {
-            display: inline-block;
-            background-color: #007bff;
-            /* Blue background */
-            color: #fff;
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .container55 .left-column .button:hover {
-            background-color: #0056b3;
-            /* Darker blue on hover */
-        }
-
-        .container55 .right-column {
-            flex: 1 1 50%;
+          font-size: 1rem;
         }
 
         .container55 .right-column img {
-            width: 500px;
-            height: 364px;
-            object-fit: cover;
-            /* Ensures the image maintains the aspect ratio and fills the space */
-            border-radius: 5px;
-            /* Optional: Rounded corners for the image */
+          width: 100%;
+          height: auto;
+          margin-top: 1.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container55 {
+          padding: 6%;
+          flex-direction: column;
+          text-align: center;
         }
 
-        /* Responsive styles for smaller screens */
-        @media (max-width: 1200px) {
-            .container55 {
-                padding: 5%;
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .container55 .left-column,
-            .container55 .right-column {
-                flex: 1 1 100%;
-            }
-
-            .container55 .left-column h1 {
-                font-size: 2rem;
-            }
-
-            .container55 .left-column p {
-                font-size: 1rem;
-            }
-
-            .container55 .right-column img {
-                width: 100%;
-                height: auto;
-                margin-top: 1.5rem;
-            }
+        .container55 .left-column,
+        .container55 .right-column {
+          flex: 1 1 100%;
         }
 
-        @media (max-width: 768px) {
-            .container55 {
-                padding: 6%;
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .container55 .left-column,
-            .container55 .right-column {
-                flex: 1 1 100%;
-            }
-
-            .container55 .left-column h1 {
-                font-size: 1.75rem;
-            }
-
-            .container55 .left-column p {
-                font-size: 0.95rem;
-            }
-
-            .container55 .right-column img {
-                width: 100%;
-                height: auto;
-                margin-top: 1.5rem;
-            }
+        .container55 .left-column h1 {
+          font-size: 1.75rem;
         }
 
-        /* Footer Styling */
-        footer {
-            background-color: #f5f6f7;
-            padding: 56px 0;
-            /* Adjusted padding to avoid unnecessary horizontal spacing */
-            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-            color: #333;
-            width: 100%;
-            /* Ensures full-width footer */
-            box-sizing: border-box;
-            /* Includes padding within the total width */
+        .container55 .left-column p {
+          font-size: 0.95rem;
         }
 
-        .footer-container {
-            max-width: 1200px;
-            /* Ensures content has a maximum width for readability */
-            margin: 0 auto;
-            /* Centers the content horizontally */
-            padding: 0 14px;
-            /* Adds a small padding for inner content */
+        .container55 .right-column img {
+          width: 100%;
+          height: auto;
+          margin-top: 1.5rem;
         }
+      }
 
+      /* Footer Styling */
+      footer {
+        background-color: #f5f6f7;
+        padding: 56px 0;
+        /* Adjusted padding to avoid unnecessary horizontal spacing */
+        font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI,
+          Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif,
+          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        color: #333;
+        width: 100%;
+        /* Ensures full-width footer */
+        box-sizing: border-box;
+        /* Includes padding within the total width */
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        /* Ensures content has a maximum width for readability */
+        margin: 0 auto;
+        /* Centers the content horizontally */
+        padding: 0 14px;
+        /* Adds a small padding for inner content */
+      }
+
+      .footer-main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .column-left,
+      .column-right {
+        padding: 0 14px;
+        flex: 1;
+        min-width: 250px;
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-links li {
+        margin: 10px 0;
+      }
+
+      .footer-links a {
+        text-decoration: none;
+        color: #4b0082;
+        font-weight: bold;
+        font-size: 1.3rem;
+        line-height: 1.5;
+      }
+
+      .footer-links a:hover {
+        color: #000;
+      }
+
+      /* Right Column */
+      .footer-logo {
+        width: 100px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .text-row p {
+        text-align: left;
+        line-height: 1.81rem;
+        font-size: 1.28rem;
+      }
+
+      .text-row a {
+        color: #4b0082;
+        text-decoration: none;
+      }
+
+      .text-row a:hover {
+        text-decoration: underline;
+      }
+
+      /* Social Icons Section */
+      .footer-social {
+        text-align: left;
+        margin-bottom: 20px;
+      }
+
+      .social-icons a {
+        color: #4b0082;
+        font-size: 30px;
+        margin-right: 10px;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .social-icons a:hover {
+        color: #000;
+      }
+
+      /* Footer Bottom Section */
+      .footer-line {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 20px 0;
+      }
+
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .footer-bottom p {
+        margin: 0;
+        font-size: 12px;
+      }
+
+      .legal-links a {
+        margin: 0 5px;
+        font-size: 1.12rem;
+        font-weight: 500;
+        color: #333;
+        text-decoration: none;
+      }
+
+      .legal-links a:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
         .footer-main {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .column-left,
-        .column-right {
-            padding: 0 14px;
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer-links li {
-            margin: 10px 0;
-        }
-
-        .footer-links a {
-            text-decoration: none;
-            color: #4b0082;
-            font-weight: bold;
-            font-size: 1.3rem;
-            line-height: 1.5;
-        }
-
-        .footer-links a:hover {
-            color: #000;
-        }
-
-        /* Right Column */
-        .footer-logo {
-            width: 100px;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        .text-row p {
-            text-align: left;
-            line-height: 1.81rem;
-            font-size: 1.28rem;
-        }
-
-        .text-row a {
-            color: #4b0082;
-            text-decoration: none;
-        }
-
-        .text-row a:hover {
-            text-decoration: underline;
-        }
-
-        /* Social Icons Section */
-        .footer-social {
-            text-align: left;
-            margin-bottom: 20px;
-        }
-
-        .social-icons a {
-            color: #4b0082;
-            font-size: 30px;
-            margin-right: 10px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .social-icons a:hover {
-            color: #000;
-        }
-
-        /* Footer Bottom Section */
-        .footer-line {
-            border: none;
-            border-top: 1px solid #ccc;
-            margin: 20px 0;
+          flex-direction: column;
+          padding: 0 14px;
         }
 
         .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            align-items: center;
+          flex-direction: column;
+          text-align: center;
         }
 
-        .footer-bottom p {
-            margin: 0;
-            font-size: 12px;
+        .legal-links {
+          margin-top: 10px;
         }
+      }
 
-        .legal-links a {
-            margin: 0 5px;
-            font-size: 1.12rem;
-            font-weight: 500;
-            color: #333;
-            text-decoration: none;
-        }
+      .container999 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4% 8%;
+        gap: 3%;
+        flex-wrap: wrap;
+      }
 
-        .legal-links a:hover {
-            text-decoration: underline;
-        }
+      .left-column999,
+      .right-column999 {
+        padding: 2%;
+      }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .footer-main {
-                flex-direction: column;
-                padding: 0 14px;
-            }
+      .left-column999 {
+        flex: 1 1 45%;
+      }
 
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
+      .left-column999 h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #1d2833;
+      }
 
-            .legal-links {
-                margin-top: 10px;
-            }
-        }
+      .left-column999 p {
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+      }
 
+      .left-column999 .button {
+        display: inline-block;
+        background-color: #4a148c;
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: bold;
+        /* border-radius: 5px; */
+        transition: background-color 0.3s ease;
+      }
+
+      .left-column999 .button:hover {
+        background-color: #2e1d43;
+      }
+
+      .right-column999 {
+        flex: 1 1 50%;
+      }
+
+      .right-column999 img {
+        width: 500px;
+        height: 364px;
+        object-fit: cover;
+        /* border-radius: 5px; */
+      }
+
+      /* Responsive styles for smaller screens */
+      @media (max-width: 768px) {
+        /* All sections: Default flex-direction for mobile */
         .container999 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4% 8%;
-  gap: 3%;
-  flex-wrap: wrap;
-}
+          flex-direction: column-reverse;
+          text-align: center;
+        }
 
-.left-column999, .right-column999 {
-  padding: 2%;
-}
+        /* Ensure reversed sections display the image first */
+        .container999:nth-of-type(1),
+        .container999:nth-of-type(3) {
+          flex-direction: column;
+        }
 
-.left-column999 {
-  flex: 1 1 45%;
-}
-
-.left-column999 h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: #1d2833;
-}
-
-.left-column999 p {
-  font-size: 1.125rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.8;
-}
-
-.left-column999 .button {
-  display: inline-block;
-  background-color: #4A148C;
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: bold;
-  /* border-radius: 5px; */
-  transition: background-color 0.3s ease;
-}
-
-.left-column999 .button:hover {
-  background-color: #2e1d43;
-}
-
-.right-column999 {
-  flex: 1 1 50%;
-}
-
-.right-column999 img {
-  width: 500px;
-  height: 364px;
-  object-fit: cover;
-  /* border-radius: 5px; */
-}
-
-/* Responsive styles for smaller screens */
-@media (max-width: 768px) {
-  /* All sections: Default flex-direction for mobile */
-  .container999 {
-    flex-direction: column-reverse;
-    text-align: center;
-  }
-
-  /* Ensure reversed sections display the image first */
-  .container999:nth-of-type(1),
-  .container999:nth-of-type(3) {
-    flex-direction: column;
-  }
-
-  .right-column999 img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 1.5rem;
-  }
-}
-
+        .right-column999 img {
+          width: 100%;
+          height: auto;
+          margin-bottom: 1.5rem;
+        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <nav class="navbar">
-            <div class="logo">Logo</div>
-            <ul class="nav-links">
-                <li><a href="/Index.html">Home</a></li>
-                <li><a href="/About.html">About</a></li>
-                <li><a href="/Solutions.html">Services</a></li>
-                <li><a href="/service1.html">Solution</a></li>
-                <li><a href="/Contact.html">Contact</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
+      <nav class="navbar">
+        <div class="logo">Logo</div>
+        <ul class="nav-links">
+          <li><a href="../Index.html">Home</a></li>
+          <li><a href="../About.html">About</a></li>
+          <li><a href="../Solutions.html">Services</a></li>
+          <li><a href="../service1.html">Solution</a></li>
+          <li><a href="../Contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
     </header>
     <!-- Hero Section -->
     <section class="hero">
-        <img src="/slide1.jpeg" alt="Slide 1" class="active">
-        <img src="/slide2.jpeg" alt="Slide 2">
-        <img src="/slide3.jpeg" alt="Slide 3">
+      <img src="../slide1.jpeg" alt="Slide 1" class="active" />
+      <img src="../slide2.jpeg" alt="Slide 2" />
+      <img src="../slide3.jpeg" alt="Slide 3" />
 
-        <div class="hero-content">
-            <h1>Slide Title</h1>
-            <p>Slide description with text-revealing effect.</p>
-        </div>
+      <div class="hero-content">
+        <h1>Slide Title</h1>
+        <p>Slide description with text-revealing effect.</p>
+      </div>
 
-        <button class="arrow left">&#8249;</button>
-        <button class="arrow right">&#8250;</button>
+      <button class="arrow left">&#8249;</button>
+      <button class="arrow right">&#8250;</button>
     </section>
 
     <!-- News Section -->
     <section class="news">
-        <div class="news-carousel">
-            <div class="news-item">News 1: Lorem ipsum dolor sit amet.</div>
-            <div class="news-item">News 2: Consectetur adipiscing elit.</div>
-            <div class="news-item">News 3: Sed do eiusmod tempor incididunt.</div>
-        </div>
+      <div class="news-carousel">
+        <div class="news-item">News 1: Lorem ipsum dolor sit amet.</div>
+        <div class="news-item">News 2: Consectetur adipiscing elit.</div>
+        <div class="news-item">News 3: Sed do eiusmod tempor incididunt.</div>
+      </div>
 
-        <button class="arrow left">&#8249;</button>
-        <button class="arrow right">&#8250;</button>
+      <button class="arrow left">&#8249;</button>
+      <button class="arrow right">&#8250;</button>
     </section>
 
     <!-- vission mission Section -->
     <section class="vision-mission">
-        <div class="container">
-            <div class="row">
-                <!-- Left Column (Vision & Mission Text) -->
-                <div class="col-md-6 vision-mission-text">
-                    <div class="vision">
-                        <h2>Vision</h2>
-                        <hr>
-                        <p>Offer the best IT solutions to customers in terms of Quality Service,<br> Choice of Solution,
-                            and Security.</p>
-                    </div>
-                    <div class="mission">
-                        <h2>Mission</h2>
-                        <hr>
-                        <p>Offer the best IT solutions to customers in terms of Quality Service, <br>Choice of Solution,
-                            and Security.</p>
-                    </div>
-                </div>
-
-                <!-- Right Column (Image) -->
-                <div class="col-md-6 vision-mission-image">
-                    <img src="/vission.jpeg" alt="Vision and Mission Image" class="img-fluid">
-                </div>
+      <div class="container">
+        <div class="row">
+          <!-- Left Column (Vision & Mission Text) -->
+          <div class="col-md-6 vision-mission-text">
+            <div class="vision">
+              <h2>Vision</h2>
+              <hr />
+              <p>
+                Offer the best IT solutions to customers in terms of Quality
+                Service,<br />
+                Choice of Solution, and Security.
+              </p>
             </div>
+            <div class="mission">
+              <h2>Mission</h2>
+              <hr />
+              <p>
+                Offer the best IT solutions to customers in terms of Quality
+                Service, <br />Choice of Solution, and Security.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Column (Image) -->
+          <div class="col-md-6 vision-mission-image">
+            <img
+              src="../vission.jpeg"
+              alt="Vision and Mission Image"
+              class="img-fluid"
+            />
+          </div>
         </div>
+      </div>
     </section>
 
-
-
-     <!-- New Reversed Section -->
+    <!-- New Reversed Section -->
     <section class="container999">
       <div class="right-column999">
-        <img src="/slide3.jpeg" alt="Innovate with Us">
+        <img src="../slide3.jpeg" alt="Innovate with Us" />
       </div>
       <div class="left-column999">
         <h1>Innovate with Us</h1>
-        <p>Join us in shaping the future of technology, where innovation meets excellence to create transformative solutions for a better tomorrow.</p>
+        <p>
+          Join us in shaping the future of technology, where innovation meets
+          excellence to create transformative solutions for a better tomorrow.
+        </p>
         <a href="#" class="button">Discover More</a>
       </div>
     </section>
 
-  <!-- Original Section -->
-  <section class="container999">
-    <div class="left-column999">
-      <h1>Modernize and Transform</h1>
-      <p>We work every day to support our clients’ growth in the era of AI and to deliver mission-critical operations at scale with security, reliability, performance, and compliance.</p>
-      <a href="#" class="button">Explore Our Offerings</a>
-    </div>
-    <div class="right-column999">
-      <img src="/slide2.jpeg" alt="Modernize and Transform">
-    </div>
-  </section>
+    <!-- Original Section -->
+    <section class="container999">
+      <div class="left-column999">
+        <h1>Modernize and Transform</h1>
+        <p>
+          We work every day to support our clients’ growth in the era of AI and
+          to deliver mission-critical operations at scale with security,
+          reliability, performance, and compliance.
+        </p>
+        <a href="#" class="button">Explore Our Offerings</a>
+      </div>
+      <div class="right-column999">
+        <img src="../slide2.jpeg" alt="Modernize and Transform" />
+      </div>
+    </section>
 
-  <!-- New Reversed Section -->
-  <section class="container999">
-    <div class="right-column999">
-      <img src="/slide1.jpeg" alt="Innovate with Us">
-    </div>
-    <div class="left-column999">
-      <h1>Innovate with Us</h1>
-      <p>Join us in shaping the future of technology, where innovation meets excellence to create transformative solutions for a better tomorrow.</p>
-      <a href="#" class="button">Discover More</a>
-    </div>
-  </section>
+    <!-- New Reversed Section -->
+    <section class="container999">
+      <div class="right-column999">
+        <img src="/slide1.jpeg" alt="Innovate with Us" />
+      </div>
+      <div class="left-column999">
+        <h1>Innovate with Us</h1>
+        <p>
+          Join us in shaping the future of technology, where innovation meets
+          excellence to create transformative solutions for a better tomorrow.
+        </p>
+        <a href="#" class="button">Discover More</a>
+      </div>
+    </section>
     <!-- aboutus Section -->
     <section class="about-us">
-        <div class="container66">
-            <div class="row">
-                <div class="col-md-12 about-us-text">
-                    <h2>About Us</h2>
-                    <p>Experience and Vision of Gentlemen with vast experience in the IT industry gave birth to
-                        HashXpert Technologies LLC. Built from the ground up, HashXpert Technologies LLC is a company
-                        with a deep understanding of emerging IT industry trends. Headquartered in Dubai, covering the
-                        Middle East and India with an on-the-ground presence in UAE.</p>
-                    <p>We are one of the System Integrators in the UAE. We provide end-to-end IT solutions for startups
-                        and SMEs to large enterprises. We deliver custom IT solutions across multiple platforms and
-                        technologies. Our talented team of Xpert’s works with you to transform your ideas into reality.
-                    </p>
-                    <p>We are a growing team with expertise in product design, architecture, implementation, and
-                        deployment across multiple platforms Network, System, Security, and Services. Combined with a
-                        dedication to delivering high-quality solutions that are user-friendly and easy to maintain for
-                        our clients and their end-users, we do it all at competitive prices.</p>
-                </div>
-            </div>
+      <div class="container66">
+        <div class="row">
+          <div class="col-md-12 about-us-text">
+            <h2>About Us</h2>
+            <p>
+              Experience and Vision of Gentlemen with vast experience in the IT
+              industry gave birth to HashXpert Technologies LLC. Built from the
+              ground up, HashXpert Technologies LLC is a company with a deep
+              understanding of emerging IT industry trends. Headquartered in
+              Dubai, covering the Middle East and India with an on-the-ground
+              presence in UAE.
+            </p>
+            <p>
+              We are one of the System Integrators in the UAE. We provide
+              end-to-end IT solutions for startups and SMEs to large
+              enterprises. We deliver custom IT solutions across multiple
+              platforms and technologies. Our talented team of Xpert’s works
+              with you to transform your ideas into reality.
+            </p>
+            <p>
+              We are a growing team with expertise in product design,
+              architecture, implementation, and deployment across multiple
+              platforms Network, System, Security, and Services. Combined with a
+              dedication to delivering high-quality solutions that are
+              user-friendly and easy to maintain for our clients and their
+              end-users, we do it all at competitive prices.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
     <section class="container55">
-        <div class="left-column">
-            <h1>Modernize and Transform</h1>
-            <p>We work every day to support our clients’ growth in the era of AI and to deliver mission-critical
-                operations at scale with security, reliability, performance and compliance.</p>
-            <a href="#" class="button">Explore Our Offerings</a>
-        </div>
-        <div class="right-column">
-            <img src="/modernize.jpeg" alt="Modernize and Transform">
-        </div>
+      <div class="left-column">
+        <h1>Modernize and Transform</h1>
+        <p>
+          We work every day to support our clients’ growth in the era of AI and
+          to deliver mission-critical operations at scale with security,
+          reliability, performance and compliance.
+        </p>
+        <a href="#" class="button">Explore Our Offerings</a>
+      </div>
+      <div class="right-column">
+        <img src="/modernize.jpeg" alt="Modernize and Transform" />
+      </div>
     </section>
     <section class="section-connect">
-        <h2>Connect with DXC</h2>
-        <button class="contact-button">Contact Us</button>
+      <h2>Connect with DXC</h2>
+      <button class="contact-button">Contact Us</button>
     </section>
 
-
     <footer>
-        <div class="footer-container">
-            <!-- Main Section -->
-            <div class="footer-main">
-                <div class="column-left">
-                    <ul class="footer-links">
-                        <li><a href="#">ABOUT</a></li>
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#">Solution</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="column-right">
-                    <div class="logo-row">
-                        <img src="logo.png" alt="DXC Logo" class="footer-logo">
-                    </div>
-                    <div class="text-row">
-                        <p>
-                            DXC Technology (NYSE: DXC) helps global companies run their mission-critical systems and
-                            operations while
-                            modernizing IT, optimizing data architectures, and ensuring security and scalability across
-                            public, private, and
-                            hybrid clouds. The world's largest companies and public sector organizations trust DXC to
-                            deploy services to drive
-                            new levels of performance, competitiveness, and customer experience across their IT estates.
-                            Learn more about how
-                            we deliver excellence for our customers and colleagues at <a href="https://dxc.com"
-                                target="_blank">DXC.com</a>.
-                        </p>
-                    </div>
-                </div>
+      <div class="footer-container">
+        <!-- Main Section -->
+        <div class="footer-main">
+          <div class="column-left">
+            <ul class="footer-links">
+              <li><a href="#">ABOUT</a></li>
+              <li><a href="#">HOME</a></li>
+              <li><a href="#">Solution</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="column-right">
+            <div class="logo-row">
+              <img src="logo.png" alt="DXC Logo" class="footer-logo" />
             </div>
-
-            <!-- Social Icons Section -->
-            <div class="footer-social">
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
+            <div class="text-row">
+              <p>
+                DXC Technology (NYSE: DXC) helps global companies run their
+                mission-critical systems and operations while modernizing IT,
+                optimizing data architectures, and ensuring security and
+                scalability across public, private, and hybrid clouds. The
+                world's largest companies and public sector organizations trust
+                DXC to deploy services to drive new levels of performance,
+                competitiveness, and customer experience across their IT
+                estates. Learn more about how we deliver excellence for our
+                customers and colleagues at
+                <a href="https://dxc.com" target="_blank">DXC.com</a>.
+              </p>
             </div>
-
-            <!-- Footer Bottom Section -->
-            <hr class="footer-line">
-            <div class="footer-bottom">
-                <p class="copyright">© DXC Technology Company</p>
-                <div class="legal-links">
-                    <a href="#">Cookies</a> |
-                    <a href="#">Terms</a> |
-                    <a href="#">FAQ</a>
-                </div>
-            </div>
+          </div>
         </div>
+
+        <!-- Social Icons Section -->
+        <div class="footer-social">
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <!-- Footer Bottom Section -->
+        <hr class="footer-line" />
+        <div class="footer-bottom">
+          <p class="copyright">© DXC Technology Company</p>
+          <div class="legal-links">
+            <a href="#">Cookies</a> | <a href="#">Terms</a> |
+            <a href="#">FAQ</a>
+          </div>
+        </div>
+      </div>
     </footer>
     <!-- Scroll Up Button -->
     <button id="scrollUpBtn" title="Scroll to Top">↑</button>
     <script src="script.js"></script>
     <script>
+      // Scroll Up Button Functionality
+      var scrollUpBtn = document.getElementById("scrollUpBtn");
 
+      // When the user scrolls down 100px from the top of the document, show the button
+      window.onscroll = function () {
+        if (
+          document.body.scrollTop > 100 ||
+          document.documentElement.scrollTop > 100
+        ) {
+          scrollUpBtn.style.display = "block";
+        } else {
+          scrollUpBtn.style.display = "none";
+        }
+      };
 
-        // Scroll Up Button Functionality
-        var scrollUpBtn = document.getElementById("scrollUpBtn");
-
-        // When the user scrolls down 100px from the top of the document, show the button
-        window.onscroll = function () {
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                scrollUpBtn.style.display = "block";
-            } else {
-                scrollUpBtn.style.display = "none";
-            }
-        };
-
-        // When the user clicks on the button, scroll to the top of the document
-        scrollUpBtn.addEventListener("click", function () {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
+      // When the user clicks on the button, scroll to the top of the document
+      scrollUpBtn.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
     </script>
     <script>
-        // Hero Section Slider
-        const heroImages = document.querySelectorAll('.hero img');
-        const heroLeftArrow = document.querySelector('.hero .arrow.left');
-        const heroRightArrow = document.querySelector('.hero .arrow.right');
-        let heroIndex = 0;
+      // Hero Section Slider
+      const heroImages = document.querySelectorAll(".hero img");
+      const heroLeftArrow = document.querySelector(".hero .arrow.left");
+      const heroRightArrow = document.querySelector(".hero .arrow.right");
+      let heroIndex = 0;
 
-        function showHeroSlide(index) {
-            heroImages.forEach((img, i) => {
-                img.classList.toggle('active', i === index);
-            });
-        }
-
-        heroLeftArrow.addEventListener('click', () => {
-            heroIndex = (heroIndex - 1 + heroImages.length) % heroImages.length;
-            showHeroSlide(heroIndex);
+      function showHeroSlide(index) {
+        heroImages.forEach((img, i) => {
+          img.classList.toggle("active", i === index);
         });
+      }
 
-        heroRightArrow.addEventListener('click', () => {
-            heroIndex = (heroIndex + 1) % heroImages.length;
-            showHeroSlide(heroIndex);
-        });
+      heroLeftArrow.addEventListener("click", () => {
+        heroIndex = (heroIndex - 1 + heroImages.length) % heroImages.length;
+        showHeroSlide(heroIndex);
+      });
 
-        // Automatic Slide for Hero Section
-        setInterval(() => {
-            heroIndex = (heroIndex + 1) % heroImages.length;
-            showHeroSlide(heroIndex);
-        }, 5000);
+      heroRightArrow.addEventListener("click", () => {
+        heroIndex = (heroIndex + 1) % heroImages.length;
+        showHeroSlide(heroIndex);
+      });
 
-        // News Carousel Slider
-        const newsItems = document.querySelectorAll('.news-item');
-        const newsCarousel = document.querySelector('.news-carousel');
-        const newsLeftArrow = document.querySelector('.news .arrow.left');
-        const newsRightArrow = document.querySelector('.news .arrow.right');
-        let newsIndex = 0;
+      // Automatic Slide for Hero Section
+      setInterval(() => {
+        heroIndex = (heroIndex + 1) % heroImages.length;
+        showHeroSlide(heroIndex);
+      }, 5000);
 
-        function showNewsSlide(index) {
-            const offset = -index * 100;
-            newsCarousel.style.transform = `translateX(${offset}%)`;
-        }
+      // News Carousel Slider
+      const newsItems = document.querySelectorAll(".news-item");
+      const newsCarousel = document.querySelector(".news-carousel");
+      const newsLeftArrow = document.querySelector(".news .arrow.left");
+      const newsRightArrow = document.querySelector(".news .arrow.right");
+      let newsIndex = 0;
 
-        newsLeftArrow.addEventListener('click', () => {
-            newsIndex = (newsIndex - 1 + newsItems.length) % newsItems.length;
-            showNewsSlide(newsIndex);
-        });
+      function showNewsSlide(index) {
+        const offset = -index * 100;
+        newsCarousel.style.transform = `translateX(${offset}%)`;
+      }
 
-        newsRightArrow.addEventListener('click', () => {
-            newsIndex = (newsIndex + 1) % newsItems.length;
-            showNewsSlide(newsIndex);
-        });
+      newsLeftArrow.addEventListener("click", () => {
+        newsIndex = (newsIndex - 1 + newsItems.length) % newsItems.length;
+        showNewsSlide(newsIndex);
+      });
 
-        // Automatic Slide for News
-        setInterval(() => {
-            newsIndex = (newsIndex + 1) % newsItems.length;
-            showNewsSlide(newsIndex);
-        }, 5000);
+      newsRightArrow.addEventListener("click", () => {
+        newsIndex = (newsIndex + 1) % newsItems.length;
+        showNewsSlide(newsIndex);
+      });
+
+      // Automatic Slide for News
+      setInterval(() => {
+        newsIndex = (newsIndex + 1) % newsItems.length;
+        showNewsSlide(newsIndex);
+      }, 5000);
     </script>
-</body>
-
+  </body>
 </html>
